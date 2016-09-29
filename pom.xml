@@ -134,6 +134,9 @@
                 <artifactId>javasimon-console-embed</artifactId>
                 <version>${javasimon.version}</version>
             </dependency>
+
+            <!-- test -->
+
         </dependencies>
     </dependencyManagement>
 
@@ -162,6 +165,5 @@
         </plugins>
     </build>
 
-    <!-- test -->
 
 </project>
