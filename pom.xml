@@ -18,6 +18,8 @@
         <module>hanfu-start</module>
         <module>hanfu-web</module>
         <module>hanfu-utils</module>
+        <module>hanfu-middleware</module>
+        <module>hanfu-common</module>
     </modules>
 
 

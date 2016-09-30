@@ -1,5 +1,6 @@
 package com.dexingworld.hanfu.web.startup;
 
+import com.dexingworld.hanfu.utils.PropertieUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +35,11 @@ public class QuickWebBootstrap extends SpringBootServletInitializer implements E
 
     private static final Logger LOGGER = LoggerFactory.getLogger(QuickWebBootstrap.class);
 
+    private static final String WEB_CONTEXT_PATH = "web.contextPath";
+    private static final String WEB_PORT = "web.port";
+    private static final String WEB_DOCUMENT_ROOT = "web.web.document.root";
+    private static final String WEB_SCAN_PACKAGE = "web.scan.package";
+
     public static void main(String[] args) {
         ArrayList sourceList = new ArrayList();
         sourceList.add(QuickWebBootstrap.class);
@@ -46,9 +52,9 @@ public class QuickWebBootstrap extends SpringBootServletInitializer implements E
 
     @Override
     public void customize(ConfigurableEmbeddedServletContainer configurableEmbeddedServletContainer) {
-        configurableEmbeddedServletContainer.setContextPath("/hanfu");
-        configurableEmbeddedServletContainer.setPort(8081);
-        String documentRootPath = "";//configurableEmbeddedServletContainer.getString("web.document.root");
+        configurableEmbeddedServletContainer.setContextPath(PropertieUtils.getString(WEB_CONTEXT_PATH));
+        configurableEmbeddedServletContainer.setPort(PropertieUtils.getInt(WEB_PORT));
+        String documentRootPath = PropertieUtils.getString(WEB_DOCUMENT_ROOT);
         if(StringUtils.isNoneBlank(documentRootPath)){
             configurableEmbeddedServletContainer.setDocumentRoot(new File(documentRootPath));
         }
@@ -60,7 +66,7 @@ public class QuickWebBootstrap extends SpringBootServletInitializer implements E
         }
 
         public void initialize(ConfigurableApplicationContext configurableApplicationContext) {
-            String scanPackage = "com.dexingworld.hanfu";//.getString("web.scan.package");
+            String scanPackage = PropertieUtils.getString(WEB_SCAN_PACKAGE);
             if(!org.springframework.util.StringUtils.isEmpty(scanPackage)) {
                 BeanDefinitionRegistry beanDefinitionRegistry = null;
                 if(configurableApplicationContext instanceof BeanDefinitionRegistry) {

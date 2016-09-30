@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:c="http://www.springframework.org/schema/c" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
+
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath*:application.properties</value>
+            </list>
+        </property>
+        <property name="fileEncoding" value="utf-8"/>
+    </bean>
+
+    <cache:annotation-driven/>
+
+    <!-- 使用annotation 自动注册bean, 并保证@Required、@Autowired的属性被注入 这里只扫描redis层 -->
+    <!-- redis template definition -->
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"
+          p:connection-factory-ref="jedisConnectionFactory"/>
+
+    <bean id="jedisConnectionFactory"
+          class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
+          p:host-name="${redis.host.name}" p:password="${redis.password}"
+          p:port="${redis.port}" p:use-pool="true" p:poolConfig-ref="jedisPoolConfig"
+          p:database="${redis.database}" p:timeout="${redis.timeout}"/>
+
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig"
+          p:maxIdle="${redis.pool.max-idle}" p:maxTotal="${redis.pool.max-active}"
+          p:minIdle="${redis.pool.min-idle}"/>
+
+   <!-- <bean id="cacheManager" class="org.springframework.data.redis.cache.RedisCacheManager"
+          c:template-ref="redisTemplate"/>-->
+
+</beans>
