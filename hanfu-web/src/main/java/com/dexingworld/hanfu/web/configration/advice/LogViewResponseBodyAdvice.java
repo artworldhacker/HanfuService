@@ -30,6 +30,7 @@ public class LogViewResponseBodyAdvice implements ResponseBodyAdvice<Object> {
             ResultResponse result = (ResultResponse) body;
             if (!result.isStatus()
                     && request instanceof ServletServerHttpRequest) {
+                //记录错误日志
                 ((ServletServerHttpRequest) request).getServletRequest()
                         .setAttribute("response_body_object_status",
                                 result.getError());

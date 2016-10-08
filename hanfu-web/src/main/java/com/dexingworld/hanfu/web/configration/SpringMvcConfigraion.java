@@ -3,16 +3,20 @@ package com.dexingworld.hanfu.web.configration;
 import com.dexingworld.hanfu.web.configration.adapter.HanfuRequestMappingHandlerAdapter;
 import com.dexingworld.hanfu.web.configration.advice.LogViewResponseBodyAdvice;
 import com.dexingworld.hanfu.web.interceptor.SystemInterceptor;
+import com.google.common.collect.Lists;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.GsonHttpMessageConverter;
+import org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter;
 import org.springframework.util.ClassUtils;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
-import org.springframework.web.multipart.MultipartResolver;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.mvc.method.annotation.JsonViewResponseBodyAdvice;
@@ -21,7 +25,6 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.ViewResolver;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -49,30 +52,35 @@ public class SpringMvcConfigraion extends WebMvcConfigurationSupport{
         return resolver;
     }
 
-   /* @Bean
-    public MultipartResolver multipartResolver() {
-        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
-        multipartResolver.setDefaultEncoding("UTF-8");
-        return multipartResolver;
-    }*/
+
+    public List<HttpMessageConverter<?>> setMessageConverters(){
+        List<HttpMessageConverter<?>> messageConverters = Lists.newArrayList();
+        messageConverters.add(new Jaxb2RootElementHttpMessageConverter());
+        GsonHttpMessageConverter gsonHttpMessageConverter = new GsonHttpMessageConverter();
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+        gsonHttpMessageConverter.setGson(gson);
+        messageConverters.add(gsonHttpMessageConverter);
+        return messageConverters;
+    }
+
 
     @Bean
     public RequestMappingHandlerAdapter requestMappingHandlerAdapter() {
-        List<HandlerMethodArgumentResolver> argumentResolvers = new ArrayList<HandlerMethodArgumentResolver>();
+        List<HandlerMethodArgumentResolver> argumentResolvers = Lists.newArrayList();
         addArgumentResolvers(argumentResolvers);
 
-        List<HandlerMethodReturnValueHandler> returnValueHandlers = new ArrayList<HandlerMethodReturnValueHandler>();
+        List<HandlerMethodReturnValueHandler> returnValueHandlers = Lists.newArrayList();
         addReturnValueHandlers(returnValueHandlers);
 
         HanfuRequestMappingHandlerAdapter adapter = new HanfuRequestMappingHandlerAdapter();
         adapter.setContentNegotiationManager(mvcContentNegotiationManager());
-        adapter.setMessageConverters(getMessageConverters());
+        adapter.setMessageConverters(setMessageConverters());
         adapter.setWebBindingInitializer(getConfigurableWebBindingInitializer());
         adapter.setCustomArgumentResolvers(argumentResolvers);
         adapter.setCustomReturnValueHandlers(returnValueHandlers);
 
         if (jackson2Present) {
-            List<ResponseBodyAdvice<?>> interceptors = new ArrayList<ResponseBodyAdvice<?>>();
+            List<ResponseBodyAdvice<?>> interceptors = Lists.newArrayList();
             interceptors.add(new JsonViewResponseBodyAdvice());
             interceptors.add(new LogViewResponseBodyAdvice());
             adapter.setResponseBodyAdvice(interceptors);

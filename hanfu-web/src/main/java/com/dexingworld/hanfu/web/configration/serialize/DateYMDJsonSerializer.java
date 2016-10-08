@@ -15,11 +15,12 @@ import java.util.Date;
  */
 public class DateYMDJsonSerializer extends JsonSerializer<Date> {
 
-    private DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+    private static DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
     @Override
     public void serialize(Date date, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException, JsonProcessingException {
         if (date != null) {
             jsonGenerator.writeString(format.format(date));
         }
     }
+
 }

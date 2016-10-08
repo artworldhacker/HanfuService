@@ -31,13 +31,13 @@ public class HanfuRequestMappingHandlerAdapter extends RequestMappingHandlerAdap
     @Override
     protected InitBinderDataBinderFactory createDataBinderFactory(
             List<InvocableHandlerMethod> binderMethods) throws Exception {
-        return new CRQSServletRequestDataBinderFactory(binderMethods,
+        return new HanfuServletRequestDataBinderFactory(binderMethods,
                 getWebBindingInitializer());
     }
 
-    private class CRQSServletRequestDataBinderFactory extends
+    private class HanfuServletRequestDataBinderFactory extends
             ServletRequestDataBinderFactory {
-        public CRQSServletRequestDataBinderFactory(
+        public HanfuServletRequestDataBinderFactory(
                 List<InvocableHandlerMethod> binderMethods,
                 WebBindingInitializer initializer) {
             super(binderMethods, initializer);

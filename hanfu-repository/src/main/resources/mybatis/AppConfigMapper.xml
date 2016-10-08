@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dexingworld.hanfu.repository.dao.AppConfigDao">
+
+  <sql id="requestAllFields">
+    <![CDATA[
+            Id AS id,
+            app_id AS appId,
+            app_name AS appName
+        ]]>
+  </sql>
+
+  <sql id="whereClause">
+    <where>
+      <if test="null!=id">AND Id = #{id}</if>
+      <if test="null!=appId and ''!=appId">AND app_id = #{appId}</if>
+      <if test="null!=appName and ''!=appName">AND app_name = #{appName}</if>
+      <include refid="extendedWhereClause" />
+    </where>
+  </sql>
+
+  <insert id="add" useGeneratedKeys="true" parameterType="com.dexingworld.hanfu.repository.entity.AppConfig" keyProperty="id">
+    INSERT INTO t_app_config
+    <trim prefix="(" suffix=")" prefixOverrides=",">
+      <if test="null!=id">,Id</if>
+      <if test="null!=appId and ''!=appId">,app_id</if>
+      <if test="null!=appName and ''!=appName">,app_name</if>
+    </trim>
+    VALUES
+    <trim prefix="(" suffix=")" prefixOverrides=",">
+      <if test="null!=id">,#{id}</if>
+      <if test="null!=appId and ''!=appId">,#{appId}</if>
+      <if test="null!=appName and ''!=appName">,#{appName}</if>
+    </trim>
+  </insert>
+
+  <update id="update" parameterType="com.dexingworld.hanfu.repository.entity.AppConfig">
+    UPDATE t_app_config
+    <trim prefix="SET" prefixOverrides=",">
+      <if test="null!=id">,Id = #{id}</if>
+      <if test="null!=appId and ''!=appId">,app_id = #{appId}</if>
+      <if test="null!=appName and ''!=appName">,app_name = #{appName}</if>
+      <include refid="extendedUpdateSql" />
+    </trim>
+    WHERE id = #{id}
+  </update>
+
+  <select id="query" parameterType="com.dexingworld.hanfu.repository.entity.AppConfig" resultType="com.dexingworld.hanfu.repository.entity.AppConfig">
+    SELECT <include refid="requestAllFields"/> FROM t_app_config
+    <include refid="whereClause" />
+    <include refid="extendedOrderByClause" />
+  
+  </select>
+
+  <select id="get" parameterType="com.dexingworld.hanfu.repository.entity.AppConfig" resultType="com.dexingworld.hanfu.repository.entity.AppConfig">
+    SELECT <include refid="requestAllFields"/> FROM t_app_config
+    <include refid="whereClause" />
+    LIMIT 1
+  </select>
+
+  <select id="getById" parameterType="long" resultType="com.dexingworld.hanfu.repository.entity.AppConfig">
+    SELECT <include refid="requestAllFields"/> FROM t_app_config WHERE id = #{id}
+  </select>
+
+  <select id="count" parameterType="com.dexingworld.hanfu.repository.entity.AppConfig" resultType="int">
+    SELECT COUNT(1) FROM t_app_config <include refid="whereClause" />
+  </select>
+
+  <!-- 扩展的更新等语句（自定义）-->
+  <sql id="extendedUpdateSql">
+   
+  </sql>
+
+  <!-- 扩展的条件过滤语句（自定义）-->
+  <sql id="extendedWhereClause">
+    
+  </sql>
+
+  <!-- 扩展的排序等语句（自定义）-->
+  <sql id="extendedOrderByClause">
+   
+  </sql>
+
+</mapper>
