@@ -1,6 +1,6 @@
 package com.dexingworld.hanfu.web.configration.advice;
 
-import com.dexingworld.hanfu.web.response.ResultResponse;
+import com.dexingworld.hanfu.common.response.ResultResponse;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;

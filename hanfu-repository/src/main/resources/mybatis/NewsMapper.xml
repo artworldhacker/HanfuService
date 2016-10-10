@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dexingworld.hanfu.repository.dao.NewsDao">
+    
+    <sql id="requestAllFields">
+        <![CDATA[
+            id,
+            title,
+            content,
+            pic,
+            link,
+            remark
+        ]]>
+    </sql>
+    
+    <sql id="whereClause">
+        <where>
+            <if test="null!=id">AND id = #{id}</if>
+            <if test="null!=title and ''!=title">AND title = #{title}</if>
+            <if test="null!=content and ''!=content">AND content = #{content}</if>
+            <if test="null!=pic and ''!=pic">AND pic = #{pic}</if>
+            <if test="null!=link and ''!=link">AND link = #{link}</if>
+            <if test="null!=remark and ''!=remark">AND remark = #{remark}</if>
+            <include refid="extendedWhereClause" />
+        </where>
+    </sql>
+    
+    <insert id="add" useGeneratedKeys="true" parameterType="com.dexingworld.hanfu.repository.entity.News" keyProperty="id">
+        INSERT INTO t_news
+        <trim prefix="(" suffix=")" prefixOverrides=",">
+            <if test="null!=title and ''!=title">,title</if>
+            <if test="null!=content and ''!=content">,content</if>
+            <if test="null!=pic and ''!=pic">,pic</if>
+            <if test="null!=link and ''!=link">,link</if>
+            <if test="null!=remark and ''!=remark">,remark</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" prefixOverrides=",">
+            <if test="null!=title and ''!=title">,#{title}</if>
+            <if test="null!=content and ''!=content">,#{content}</if>
+            <if test="null!=pic and ''!=pic">,#{pic}</if>
+            <if test="null!=link and ''!=link">,#{link}</if>
+            <if test="null!=remark and ''!=remark">,#{remark}</if>
+        </trim>
+    </insert>
+    
+    <update id="update" parameterType="com.dexingworld.hanfu.repository.entity.News">
+        UPDATE t_news
+        <trim prefix="SET" prefixOverrides=",">
+            <if test="null!=title and ''!=title">,title = #{title}</if>
+            <if test="null!=content and ''!=content">,content = #{content}</if>
+            <if test="null!=pic and ''!=pic">,pic = #{pic}</if>
+            <if test="null!=link and ''!=link">,link = #{link}</if>
+            <if test="null!=remark and ''!=remark">,remark = #{remark}</if>
+            <include refid="extendedUpdateSql" />
+        </trim>
+        WHERE id = #{id}
+    </update>
+    
+    <select id="query" parameterType="com.dexingworld.hanfu.repository.entity.News" resultType="com.dexingworld.hanfu.repository.entity.News">
+        SELECT <include refid="requestAllFields"/> FROM t_news
+        <include refid="whereClause" />
+        <include refid="extendedOrderByClause" />
+        <if test="null!=startRow">
+            LIMIT #{startRow}, #{endRow}
+        </if>
+    </select>
+    
+    <select id="get" parameterType="com.dexingworld.hanfu.repository.entity.News" resultType="com.dexingworld.hanfu.repository.entity.News">
+        SELECT <include refid="requestAllFields"/> FROM t_news
+        <include refid="whereClause" />
+        LIMIT 1
+    </select>
+    
+    <select id="getById" parameterType="long" resultType="com.dexingworld.hanfu.repository.entity.News">
+        SELECT <include refid="requestAllFields"/> FROM t_news WHERE id = #{id}
+    </select>
+    
+    <select id="count" parameterType="com.dexingworld.hanfu.repository.entity.News" resultType="int">
+        SELECT COUNT(1) FROM t_news <include refid="whereClause" />
+    </select>
+    
+    <!-- 扩展的更新等语句（自定义）-->
+    <sql id="extendedUpdateSql">
+        <if test="null!=extendedParameter">
+            
+        </if>
+    </sql>
+    
+    <!-- 扩展的条件过滤语句（自定义）-->
+    <sql id="extendedWhereClause">
+        <if test="null!=extendedParameter">
+            
+        </if>
+    </sql>
+    
+    <!-- 扩展的排序等语句（自定义）-->
+    <sql id="extendedOrderByClause">
+        <if test="null!=extendedParameter">
+            
+        </if>
+    </sql>
+    
+</mapper>

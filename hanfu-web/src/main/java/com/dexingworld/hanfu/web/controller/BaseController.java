@@ -1,16 +1,13 @@
 package com.dexingworld.hanfu.web.controller;
 
+import com.dexingworld.hanfu.common.response.ResultResponse;
 import com.dexingworld.hanfu.middleware.redis.RedisCacheManager;
-import com.dexingworld.hanfu.repository.entity.AppConfig;
-import com.dexingworld.hanfu.service.AppConfigService;
-import com.dexingworld.hanfu.web.response.ResultResponse;
 import com.google.common.collect.Maps;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -22,10 +19,6 @@ public class BaseController {
 
     @Autowired
     private RedisCacheManager cacheManager;
-
-    @Autowired
-    private AppConfigService appConfigService;
-
 
     @RequestMapping("/hello")
     public String hello(){
@@ -63,16 +56,5 @@ public class BaseController {
         resultResponse.setResult(data);
         return resultResponse.makeSuccessful();
     }
-
-    @RequestMapping("/getAppCofig")
-    public ResultResponse getAppConfig(){
-        List<AppConfig> appConfigs = appConfigService.query(new AppConfig());
-        ResultResponse resultResponse = new ResultResponse();
-        resultResponse.setResult(appConfigs);
-        return resultResponse.makeSuccessful();
-    }
-
-
-
 
 }

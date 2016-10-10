@@ -1,4 +1,4 @@
-package com.dexingworld.hanfu.web.response;
+package com.dexingworld.hanfu.common.response;
 
 import java.util.HashMap;
 import java.util.List;
@@ -30,7 +30,7 @@ public class PageResponse<T> implements java.io.Serializable {
     }
 
     public PageResponse(boolean status, int count, int current, int pageSize,
-	    List<T> rows) {
+                        List<T> rows) {
 	this.status = status;
 	this.total = count;
 	this.current = current;
@@ -39,7 +39,7 @@ public class PageResponse<T> implements java.io.Serializable {
     }
 
     public PageResponse(boolean status, String error, int total, int current,
-	    int pageSize, List<T> rows) {
+                        int pageSize, List<T> rows) {
 	this.status = status;
 	this.error = error;
 	this.total = total;
