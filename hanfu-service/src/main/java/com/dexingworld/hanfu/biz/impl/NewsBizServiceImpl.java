@@ -11,6 +11,7 @@ import com.dexingworld.hanfu.service.NewsService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by wangpeng on 2016/10/10.
@@ -22,13 +23,7 @@ public class NewsBizServiceImpl implements NewsBizService {
     private NewsService newsService;
 
     @Override
-    public PageResponse<News> queryByPage(QueryNews query) {
-        News news = new News();
-        BeanUtils.copyProperties(query,news);
-        return newsService.queryByPage(news);
-    }
-
-    @Override
+    @Transactional
     public ResultResponse add(AddNews add) {
         ResultResponse resultResponse = new ResultResponse();
         News news = new News();
@@ -37,6 +32,7 @@ public class NewsBizServiceImpl implements NewsBizService {
         return resultResponse.makeSuccessful();
     }
 
+    @Transactional
     @Override
     public ResultResponse update(UpdNews update) {
         ResultResponse resultResponse = new ResultResponse();
@@ -47,9 +43,18 @@ public class NewsBizServiceImpl implements NewsBizService {
     }
 
     @Override
+    @Transactional
     public ResultResponse delete(Long id) {
         ResultResponse resultResponse = new ResultResponse();
         newsService.delete(id);
         return resultResponse.makeSuccessful();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public PageResponse<News> queryByPage(QueryNews query) {
+        News news = new News();
+        BeanUtils.copyProperties(query, news);
+        return newsService.queryByPage(news);
     }
 }
