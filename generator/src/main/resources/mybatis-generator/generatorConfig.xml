@@ -13,7 +13,7 @@
         </commentGenerator>
 
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://192.168.7.58:3306/syslog" userId="root"
+                        connectionURL="jdbc:mysql://115.28.48.213:3306/hanfu" userId="root"
                         password="123456"/>
 
         <javaModelGenerator targetPackage="com.dexingworld.hanfu.entity"
@@ -33,7 +33,7 @@
         </javaClientGenerator>
 
 
-        <table tableName="t_db_config" domainObjectName="DbConfig"
+        <table tableName="t_news" domainObjectName="News"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">

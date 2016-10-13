@@ -9,11 +9,18 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>hanfu-start</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>hanfu-web-startup</module>
-        <module>hanfu-quick-start</module>
-    </modules>
+    <artifactId>hanfu-weixin</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.thoughtworks.xstream</groupId>
+            <artifactId>xstream</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>dom4j</groupId>
+            <artifactId>dom4j</artifactId>
+        </dependency>
+    </dependencies>
+
 
 </project>
