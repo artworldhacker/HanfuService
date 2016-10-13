@@ -1,4 +1,4 @@
-package com.dexingworld.hanfu.utils;
+package com.dexingworld.hanfu.weixin.util;
 
 import java.security.MessageDigest;
 

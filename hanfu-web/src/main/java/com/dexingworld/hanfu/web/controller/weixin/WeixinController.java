@@ -2,11 +2,11 @@ package com.dexingworld.hanfu.web.controller.weixin;
 
 import com.dexingworld.hanfu.common.response.ResultResponse;
 import com.dexingworld.hanfu.utils.PropertieUtils;
-import com.dexingworld.hanfu.utils.SHA1;
 import com.dexingworld.hanfu.weixin.MsgType;
 import com.dexingworld.hanfu.weixin.model.ImageMessage;
 import com.dexingworld.hanfu.weixin.model.InputMessage;
 import com.dexingworld.hanfu.weixin.model.OutputMessage;
+import com.dexingworld.hanfu.weixin.util.SHA1;
 import com.dexingworld.hanfu.weixin.util.SerializeXmlUtil;
 import com.google.common.collect.Lists;
 import com.thoughtworks.xstream.XStream;
