@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.dexingworld.hanfu.common.SysException;
 import com.dexingworld.hanfu.common.annotation.ProcessException;
 import com.dexingworld.hanfu.common.response.ResultResponse;
+import com.google.common.collect.Maps;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -39,7 +40,7 @@ public class HandlerExceptionAspect  implements Ordered {
                     + method.toString()
                     + "]");
         }
-        Map<String, Object> args = new HashMap<String, Object>();
+        Map<String, Object> args = Maps.newHashMap();
         if (jp.getArgs() != null) {
             // 收集提交的数据
             for (Object obj : jp.getArgs()) {
