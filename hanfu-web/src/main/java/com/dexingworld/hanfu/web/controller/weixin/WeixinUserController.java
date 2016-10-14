@@ -2,6 +2,7 @@ package com.dexingworld.hanfu.web.controller.weixin;
 
 import com.dexingworld.hanfu.biz.weixin.WeixinService;
 import com.dexingworld.hanfu.biz.weixin.WeixinUserService;
+import com.dexingworld.hanfu.common.annotation.ProcessException;
 import com.dexingworld.hanfu.common.parameter.weixin.WeixinConfig;
 import com.dexingworld.hanfu.common.parameter.weixin.user.WeixinUserGetRequest;
 import com.dexingworld.hanfu.common.response.ResultResponse;
@@ -26,6 +27,7 @@ public class WeixinUserController {
 
 
     @RequestMapping("/weixin/getUserList")
+    @ProcessException
     public ResultResponse getUserList(WeixinConfig weixinConfig){
         ResultResponse result = new ResultResponse();
         weixinConfig = GetWeixinConfigUtils.getWeixinConfig(weixinConfig);
