@@ -1,5 +1,6 @@
 package com.dexingworld.hanfu.utils.http.okhttp;
 
+import com.dexingworld.hanfu.utils.http.HttpUrlUtils;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.squareup.okhttp.*;
@@ -20,11 +21,8 @@ import java.util.concurrent.TimeUnit;
 public class OkhttpUtils {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(OkhttpUtils.class);
-
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     public static final MediaType MEDIA_TYPE_MARKDOWN = MediaType.parse("text/x-markdown; charset=utf-8");
-
-    private static final String CHARSET_NAME = "UTF-8";
 
     private static final OkHttpClient okHttpClient = new OkHttpClient();
 
@@ -80,43 +78,13 @@ public class OkhttpUtils {
     }
 
     public static String get(String url,List<BasicNameValuePair> list){
-        return get(attachHttpGetParams(url,list));
+        return get(HttpUrlUtils.attachHttpGetParams(url, list));
     }
 
     public static String get(String url){
         Request request = new Request.Builder().url(url).build();
         Response response = excute(request);
         return transResponse(response);
-    }
-
-    /**
-     * 这里使用了HttpClinet的API。只是为了方便
-     * @param params
-     * @return
-     */
-    public static String formatParams(List<BasicNameValuePair> params){
-        return URLEncodedUtils.format(params, CHARSET_NAME);
-    }
-
-    /**
-     * 为HttpGet 的 url 方便的添加多个name value 参数。
-     * @param url
-     * @param params
-     * @return
-     */
-    public static String attachHttpGetParams(String url, List<BasicNameValuePair> params){
-        return url + "?" + formatParams(params);
-    }
-
-    /**
-     * 为HttpGet 的 url 方便的添加1个name value 参数。
-     * @param url
-     * @param name
-     * @param value
-     * @return
-     */
-    public static String attachHttpGetParam(String url, String name, String value){
-        return url + "?" + name + "=" + value;
     }
 
     public static String postBody(String url,String postBody){

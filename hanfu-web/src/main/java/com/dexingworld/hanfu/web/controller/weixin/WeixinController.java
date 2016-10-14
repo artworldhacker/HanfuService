@@ -1,18 +1,24 @@
 package com.dexingworld.hanfu.web.controller.weixin;
 
+import com.dexingworld.hanfu.biz.weixin.WeixinService;
+import com.dexingworld.hanfu.common.parameter.weixin.WeixinConfig;
 import com.dexingworld.hanfu.common.response.ResultResponse;
+import com.dexingworld.hanfu.common.response.weixin.TokenResponse;
 import com.dexingworld.hanfu.utils.PropertieUtils;
 import com.dexingworld.hanfu.weixin.MsgType;
 import com.dexingworld.hanfu.weixin.model.ImageMessage;
 import com.dexingworld.hanfu.weixin.model.InputMessage;
 import com.dexingworld.hanfu.weixin.model.OutputMessage;
+import com.dexingworld.hanfu.weixin.util.GetWeixinConfigUtils;
 import com.dexingworld.hanfu.weixin.util.SHA1;
 import com.dexingworld.hanfu.weixin.util.SerializeXmlUtil;
 import com.google.common.collect.Lists;
 import com.thoughtworks.xstream.XStream;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -28,11 +34,14 @@ import java.util.*;
 /**
  * Created by wangpeng on 2016/10/13.
  */
-@RestController("/weixin")
+@RestController
 public class WeixinController {
     
     private static final Logger LOGGER = LoggerFactory.getLogger(WeixinController.class);
     private static String TOKEN = null;
+
+    @Autowired
+    private WeixinService weixinService;
 
     @PostConstruct
     public void init(){
@@ -41,13 +50,29 @@ public class WeixinController {
         }
     }
 
+    @RequestMapping("/weixin/getToken")
+    public ResultResponse accessToken(WeixinConfig weixinConfig){
+        ResultResponse result = new ResultResponse();
+        weixinConfig = GetWeixinConfigUtils.getWeixinConfig(weixinConfig);
+        TokenResponse tokenResponse =  weixinService.accessToken(weixinConfig);
+        if(tokenResponse == null){
+            if(tokenResponse == null ){
+                return result.makeFailure("请求微信获取token失败!");
+            }
+        }
+        result.setResult(tokenResponse);
+        if(tokenResponse.getErrcode() != null){
+            return result.makeFailure("请求微信获取token失败!错误代码{"+tokenResponse.getErrcode()+"}，错误消息{"+tokenResponse.getErrmsg()+"}");
+        }
+        return result.makeSuccessful();
+    }
+
     /**
      * 接收微信发送的消息
      * @param request
      * @param response
      */
-    @RequestMapping( value = "/receiveMsg", method = { RequestMethod.GET, RequestMethod.POST })
-    @ResponseBody
+    @RequestMapping("/weixin/receiveMsg")
     public ResultResponse weixin( HttpServletRequest request, HttpServletResponse response){
         ResultResponse resultResponse = new ResultResponse();
         boolean isGet = request.getMethod().toLowerCase().equals("get");
@@ -128,13 +153,15 @@ public class WeixinController {
         // 将指定节点下的xml节点数据映射为对象
         xs.alias("xml", InputMessage.class);
         // 将流转换为字符串
-        StringBuilder xmlMsg = new StringBuilder();
+    /*    StringBuilder xmlMsg = new StringBuilder();
         byte[] b = new byte[4096];
         for (int n; (n = in.read(b)) != -1;) {
             xmlMsg.append(new String(b, 0, n, "UTF-8"));
-        }
+        }*/
+        byte[] byteData = IOUtils.toByteArray(in);
+        String xmlMsg = new String(byteData,"UTF-8");
         // 将xml内容转换为InputMessage对象
-        InputMessage inputMsg = (InputMessage) xs.fromXML(xmlMsg.toString());
+        InputMessage inputMsg = (InputMessage) xs.fromXML(xmlMsg);
 
         String servername = inputMsg.getToUserName();// 服务端
         String custermname = inputMsg.getFromUserName();// 客户端

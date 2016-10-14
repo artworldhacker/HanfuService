@@ -3,6 +3,8 @@ package com.dexingworld.hanfu.middleware.redis;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Collection;
+
 /**
  * Created by wangpeng on 2016/9/30.
  */
@@ -24,7 +26,7 @@ public class RedisCacheManager {
         if(isExist(key)){
             return redisCache.get(key);
         }
-        return false;
+        return null;
     }
 
     public String getString(Object key){
@@ -47,6 +49,14 @@ public class RedisCacheManager {
             return true;
         }
         return false;
+    }
+
+    public void delete(Object key){
+        redisCache.delete(key);
+    }
+
+    public void deleteAll(Collection<Object> keys) {
+        redisCache.deleteAll(keys);
     }
 
 

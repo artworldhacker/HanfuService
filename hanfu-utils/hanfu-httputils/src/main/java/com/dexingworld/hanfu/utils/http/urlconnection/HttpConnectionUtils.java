@@ -38,13 +38,6 @@ public class HttpConnectionUtils {
         return result;
     }
 
-    public static void main(String[] args) {
-        String url = "http://115.28.48.213:8282/hanfu/news/page";
-        String result = get(url);
-        System.out.println(result);
-    }
-
-
     public static String post(String link,String param){
         String result = null;
         try {
