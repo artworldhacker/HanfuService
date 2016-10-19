@@ -40,7 +40,7 @@ public class GroovyComponent {
                 throw new Exception("未找到groovy资源文件");
             }
             for (Resource resource : resources){
-                String text = new String(IOUtils.toByteArray(resource.getInputStream()));
+                String text = new String(IOUtils.toByteArray(resource.getInputStream()),ENCODING);
                 Class clazz = groovyClassLoader.parseClass(text,resource.getFilename());
                 GroovyObject scriptInstance = (GroovyObject)clazz.newInstance();
                 GroovyObj groovyObj = new GroovyObj();
