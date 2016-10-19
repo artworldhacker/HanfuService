@@ -20,7 +20,7 @@
         <module>hanfu-utils</module>
         <module>hanfu-middleware</module>
         <module>hanfu-common</module>
-        <module>generator</module>
+        <!--<module>generator</module>-->
         <module>hanfu-bean</module>
         <module>hanfu-repository</module>
         <module>hanfu-service</module>
@@ -49,12 +49,20 @@
         <jsoup.version>1.7.2</jsoup.version>
         <fastjson.version>1.1.41</fastjson.version>
         <aspectweaver.version>1.8.9</aspectweaver.version>
+        <groovy.version>2.4.6</groovy.version>
     </properties>
 
 
     <dependencyManagement>
 
         <dependencies>
+
+
+            <dependency>
+                <groupId>org.codehaus.groovy</groupId>
+                <artifactId>groovy-all</artifactId>
+                <version>${groovy.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>org.aspectj</groupId>

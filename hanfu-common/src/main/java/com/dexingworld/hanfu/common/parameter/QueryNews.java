@@ -7,6 +7,8 @@ import java.io.Serializable;
  */
 public class QueryNews implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     /**
      * 主键
      */

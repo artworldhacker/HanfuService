@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>hanfu-redis</module>
+        <module>hanfu-groovy</module>
     </modules>
 
 
