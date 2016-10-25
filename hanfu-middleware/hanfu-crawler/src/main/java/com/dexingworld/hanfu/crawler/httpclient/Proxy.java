@@ -1,4 +1,4 @@
-package com.dexingworld.hanfu.utils.http.httpclient;
+package com.dexingworld.hanfu.crawler.httpclient;
 
 import java.io.Serializable;
 

@@ -15,6 +15,7 @@
         <module>hanfu-redis</module>
         <module>hanfu-groovy</module>
         <module>hanfu-analysis</module>
+        <module>hanfu-crawler</module>
     </modules>
 
 

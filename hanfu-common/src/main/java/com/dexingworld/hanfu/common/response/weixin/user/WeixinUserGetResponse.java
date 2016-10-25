@@ -31,6 +31,8 @@ public class WeixinUserGetResponse extends WeixinCommonResponse {
      */
     private String next_openid;
 
+    private List<WeixinUserInfo> userInfoList;
+
     public String getTotal() {
         return total;
     }
@@ -63,4 +65,11 @@ public class WeixinUserGetResponse extends WeixinCommonResponse {
         this.next_openid = next_openid;
     }
 
+    public List<WeixinUserInfo> getUserInfoList() {
+        return userInfoList;
+    }
+
+    public void setUserInfoList(List<WeixinUserInfo> userInfoList) {
+        this.userInfoList = userInfoList;
+    }
 }

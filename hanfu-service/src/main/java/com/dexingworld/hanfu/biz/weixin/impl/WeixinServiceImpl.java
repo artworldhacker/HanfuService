@@ -6,9 +6,9 @@ import com.dexingworld.hanfu.common.GlobalConsts;
 import com.dexingworld.hanfu.common.enums.WeixinUrlEnum;
 import com.dexingworld.hanfu.common.parameter.weixin.WeixinConfig;
 import com.dexingworld.hanfu.common.response.weixin.TokenResponse;
+import com.dexingworld.hanfu.crawler.HttpUrlUtils;
+import com.dexingworld.hanfu.crawler.urlconnection.HttpConnectionUtils;
 import com.dexingworld.hanfu.middleware.redis.RedisCacheManager;
-import com.dexingworld.hanfu.utils.http.HttpUrlUtils;
-import com.dexingworld.hanfu.utils.http.urlconnection.HttpConnectionUtils;
 import com.google.common.collect.Maps;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -53,7 +53,7 @@ public class WeixinServiceImpl implements WeixinService {
         map.put("grant_type",GlobalConsts.CLIENT_CREDENTIAL);
         map.put("appid",weixinConfig.getAppId());
         map.put("secret",weixinConfig.getSecret());
-        String accessTokenUrl = HttpUrlUtils.attachHttpGetParams( WeixinUrlEnum.ACCESS_TOKEN.getUrl(),map);
+        String accessTokenUrl = HttpUrlUtils.attachHttpGetParams(WeixinUrlEnum.ACCESS_TOKEN.getUrl(), map);
         String reponse = HttpConnectionUtils.get(accessTokenUrl);
         if(StringUtils.isEmpty(reponse)){
             LOGGER.error("请求微信获取token失败!");

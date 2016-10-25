@@ -1,4 +1,4 @@
-package com.dexingworld.hanfu.utils.http.httpclient;
+package com.dexingworld.hanfu.crawler.httpclient;
 
 /**
  * Created by wangpeng on 2016/7/1.

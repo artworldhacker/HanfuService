@@ -1,4 +1,4 @@
-package com.dexingworld.hanfu.utils.http;
+package com.dexingworld.hanfu.crawler;
 
 import com.google.common.collect.Lists;
 import org.apache.http.client.utils.URLEncodedUtils;

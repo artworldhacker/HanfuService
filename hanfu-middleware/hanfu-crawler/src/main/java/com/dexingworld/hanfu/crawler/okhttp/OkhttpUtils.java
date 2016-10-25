@@ -1,10 +1,9 @@
-package com.dexingworld.hanfu.utils.http.okhttp;
+package com.dexingworld.hanfu.crawler.okhttp;
 
-import com.dexingworld.hanfu.utils.http.HttpUrlUtils;
+import com.dexingworld.hanfu.crawler.HttpUrlUtils;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.squareup.okhttp.*;
-import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.message.BasicNameValuePair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

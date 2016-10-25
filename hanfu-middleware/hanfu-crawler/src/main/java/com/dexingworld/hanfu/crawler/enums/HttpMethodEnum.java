@@ -1,4 +1,4 @@
-package com.dexingworld.hanfu.utils.http.enums;
+package com.dexingworld.hanfu.crawler.enums;
 
 /**
  * Created by wangpeng on 2016/10/13.

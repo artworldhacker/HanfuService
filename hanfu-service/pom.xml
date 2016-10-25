@@ -30,7 +30,7 @@
         </dependency>
         <dependency>
             <groupId>com.dexingworld.hanfu</groupId>
-            <artifactId>hanfu-httputils</artifactId>
+            <artifactId>hanfu-crawler</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>

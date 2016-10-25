@@ -1,4 +1,4 @@
-package com.dexingworld.hanfu.utils.http.httpclient;
+package com.dexingworld.hanfu.crawler.httpclient;
 
 import com.google.common.collect.Lists;
 import org.apache.http.NameValuePair;

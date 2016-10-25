@@ -1,14 +1,12 @@
-package com.dexingworld.hanfu.utils.http.urlconnection;
+package com.dexingworld.hanfu.crawler.urlconnection;
 
-import com.dexingworld.hanfu.utils.http.enums.HttpMethodEnum;
+import com.dexingworld.hanfu.crawler.enums.HttpMethodEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StreamUtils;
 
-import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
