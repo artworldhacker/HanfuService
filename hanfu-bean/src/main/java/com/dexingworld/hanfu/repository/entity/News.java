@@ -68,4 +68,16 @@ public class News extends BasePageDataObj{
     public void setRemark(String remark) {
         this.remark = remark;
     }
+
+    @Override
+    public String toString() {
+        return "News{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", pic='" + pic + '\'' +
+                ", link='" + link + '\'' +
+                ", remark='" + remark + '\'' +
+                '}';
+    }
 }

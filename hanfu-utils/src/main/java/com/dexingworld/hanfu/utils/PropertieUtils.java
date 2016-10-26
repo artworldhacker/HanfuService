@@ -54,6 +54,17 @@ public class PropertieUtils extends PropertyPlaceholderConfigurer{
         return getLong(key);
     }
 
+    public static Boolean getBoolean(String key,boolean defualValue){
+        String value = getString(key);
+        return  StringUtils.isNoneBlank(value) ? value.equalsIgnoreCase(DEFUALT_BOOLEAN_VALUE) : defualValue;
+    }
+
+    public static Boolean getBoolean(String key){
+        return getBoolean(key,true);
+    }
+
+    private static final String DEFUALT_BOOLEAN_VALUE = "true";
+
 
 
 

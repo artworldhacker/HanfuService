@@ -1,4 +1,4 @@
-package com.dexingworld.hanfu.middleware.jiebaanalysis;
+package com.dexingworld.hanfu.middleware.jieba.analysis;
 
 import java.io.BufferedReader;
 import java.nio.file.DirectoryStream;

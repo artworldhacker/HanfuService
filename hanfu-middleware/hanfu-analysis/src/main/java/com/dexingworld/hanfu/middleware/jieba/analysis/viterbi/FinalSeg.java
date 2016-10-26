@@ -1,4 +1,4 @@
-package com.dexingworld.hanfu.middleware.jiebaanalysis.viterbi;
+package com.dexingworld.hanfu.middleware.jieba.analysis.viterbi;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,9 +13,9 @@ import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.Collections;
 
-import com.dexingworld.hanfu.middleware.jiebaanalysis.CharacterUtil;
-import com.dexingworld.hanfu.middleware.jiebaanalysis.Node;
-import com.dexingworld.hanfu.middleware.jiebaanalysis.Pair;
+import com.dexingworld.hanfu.middleware.jieba.analysis.Node;
+import com.dexingworld.hanfu.middleware.jieba.analysis.Pair;
+import com.dexingworld.hanfu.middleware.jieba.analysis.CharacterUtil;
 
 
 public class FinalSeg {

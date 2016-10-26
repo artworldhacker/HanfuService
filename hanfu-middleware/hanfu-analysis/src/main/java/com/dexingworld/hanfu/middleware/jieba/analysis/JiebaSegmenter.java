@@ -1,6 +1,6 @@
-package com.dexingworld.hanfu.middleware.jiebaanalysis;
+package com.dexingworld.hanfu.middleware.jieba.analysis;
 
-import com.dexingworld.hanfu.middleware.jiebaanalysis.viterbi.FinalSeg;
+import com.dexingworld.hanfu.middleware.jieba.analysis.viterbi.FinalSeg;
 
 import java.util.ArrayList;
 import java.util.HashMap;

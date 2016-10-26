@@ -3,21 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>hanfu-system</artifactId>
+        <artifactId>hanfu-middleware</artifactId>
         <groupId>com.dexingworld.hanfu</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>hanfu-middleware</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>hanfu-redis</module>
-        <module>hanfu-groovy</module>
-        <module>hanfu-analysis</module>
-        <module>hanfu-crawler</module>
-        <module>hanfu-netty</module>
-    </modules>
+    <artifactId>hanfu-netty</artifactId>
 
 
 </project>

@@ -23,7 +23,7 @@
  * provided by Linliangyi and copyright 2012 by Oolong studio
  * 
  */
-package com.dexingworld.hanfu.middleware.jiebaanalysis;
+package com.dexingworld.hanfu.middleware.jieba.analysis;
 
 /**
  * 表示一次词典匹配的命中

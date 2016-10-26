@@ -3,15 +3,14 @@
  */
 package com.huaban.analysis.jieba;
 
-import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Locale;
 
-import com.dexingworld.hanfu.middleware.jiebaanalysis.JiebaSegmenter;
-import com.dexingworld.hanfu.middleware.jiebaanalysis.SegToken;
-import com.dexingworld.hanfu.middleware.jiebaanalysis.WordDictionary;
+import com.dexingworld.hanfu.middleware.jieba.analysis.JiebaSegmenter;
+import com.dexingworld.hanfu.middleware.jieba.analysis.SegToken;
+import com.dexingworld.hanfu.middleware.jieba.analysis.WordDictionary;
 import junit.framework.TestCase;
 
 import org.junit.Test;

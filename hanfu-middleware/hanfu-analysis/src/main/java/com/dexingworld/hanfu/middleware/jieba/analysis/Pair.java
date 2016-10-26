@@ -1,4 +1,4 @@
-package com.dexingworld.hanfu.middleware.jiebaanalysis;
+package com.dexingworld.hanfu.middleware.jieba.analysis;
 
 public class Pair<K> {
     public K key;
