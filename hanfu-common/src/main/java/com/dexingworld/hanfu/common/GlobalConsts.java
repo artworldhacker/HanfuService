@@ -11,4 +11,5 @@ public class GlobalConsts {
     public static final String UNDER_LINE = "_";
 
     public static final String CLIENT_CREDENTIAL = "client_credential";
+    public static final Long MAX_EXPIRE_TIME = Long.valueOf(Long.parseLong(String.valueOf(2147483647)) * 1000L);
 }
