@@ -1,9 +1,9 @@
 package com.dexingworld.hanfu.middleware.redis;
 
+import com.dexingworld.hanfu.middleware.redis.client.jedis.JedisClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.Collection;
 
 /**
  * Created by wangpeng on 2016/9/30.
@@ -12,19 +12,19 @@ import java.util.Collection;
 public class RedisCacheManager {
 
     @Autowired
-    private RedisCache redisCache;
+    private JedisClient jedisClient;
 
     public void put(Object key,Object value){
-        redisCache.add(key,value);
+        jedisClient.add(key,value);
     }
 
     public void put(Object key,Object value,Long expireTime){
-        redisCache.add(key,value,expireTime);
+        jedisClient.add(key,expireTime,value);
     }
 
     public Object get(Object key){
         if(isExist(key)){
-            return redisCache.get(key);
+            return jedisClient.get(key);
         }
         return null;
     }
@@ -45,19 +45,16 @@ public class RedisCacheManager {
     }
 
     public boolean isExist(Object key){
-        if(redisCache.hasKey(key)){
+        if(jedisClient.hasKey(key)){
             return true;
         }
         return false;
     }
 
     public void delete(Object key){
-        redisCache.delete(key);
+        jedisClient.del(key);
     }
 
-    public void deleteAll(Collection<Object> keys) {
-        redisCache.deleteAll(keys);
-    }
 
 
 }

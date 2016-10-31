@@ -36,15 +36,15 @@ public class JedisClient {
     }
 
 
-    public Object get(Object key,Class clazz){
+    public Object get(Object key){
         if(!hasKey(key)){
             return null;
         }
-        return jedisConfigration.getObject(key,clazz);
+        return jedisConfigration.getObject(key);
     }
 
     public String getString(Object key){
-        return (String)get(key,String.class);
+        return (String)get(key);
     }
 
 }

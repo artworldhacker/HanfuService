@@ -2,9 +2,8 @@ package com.dexingworld.hanfu.middleware.redis.client.jedis;
 
 import com.dexingworld.hanfu.common.GlobalConsts;
 import com.dexingworld.hanfu.utils.PropertieUtils;
-import com.dexingworld.hanfu.utils.ProtoStuffSerializer;
+import com.dexingworld.hanfu.utils.SpringSerializer;
 import com.google.common.collect.Lists;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 import redis.clients.jedis.JedisPoolConfig;
@@ -25,7 +24,7 @@ public class JedisConfigration {
 
     @PostConstruct
     public void init(){
-        if(shardedJedisPool != null){
+        if(shardedJedisPool == null){
             JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
             int maxTotal = PropertieUtils.getInt("redis.pool.maxTotal");
             int maxIdle = PropertieUtils.getInt("redis.pool.maxIdle");
@@ -89,7 +88,7 @@ public class JedisConfigration {
         return "OK".equals(result);//redis加入成功会返回OK
     }
 
-    public Object getObject(Object key,Class clazz){
+    public Object getObject(Object key){
         byte[] bytes;
         ShardedJedis jedis = getResource();
         try {
@@ -100,7 +99,7 @@ public class JedisConfigration {
         } finally {
             close(jedis);
         }
-        return ProtoStuffSerializer.deSerializer(bytes,clazz);
+        return deSerializer(bytes);
     }
 
     public boolean exists(Object key){
@@ -115,7 +114,11 @@ public class JedisConfigration {
     }
 
     private byte[] serializerBytes(Object key){
-        return ProtoStuffSerializer.serializer(key,key.getClass());
+        return SpringSerializer.serialize(key);
+    }
+
+    private Object deSerializer(byte[] bytes){
+        return SpringSerializer.deserialize(bytes);
     }
 
 
