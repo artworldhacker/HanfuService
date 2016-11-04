@@ -1,5 +1,6 @@
 package com.dexingworld.hanfu.utils;
 
+
 import java.io.*;
 
 /**
@@ -7,6 +8,19 @@ import java.io.*;
  * Created by wangpeng on 2016/10/13.
  */
 public class Base64Util {
+
+    private static final String PASSWORD_ENCODE_KEY = "password.encode.key";
+
+    /**
+     * hanfu密码加密
+     * @param pwd
+     * @return
+     */
+    public static String encodeHanfuPassWord(String pwd){
+        StringBuilder sb = new StringBuilder();
+        sb.append(PropertieUtils.getString(PASSWORD_ENCODE_KEY)).append(pwd);
+        return encode(sb.toString());
+    }
 
     /**
      * 功能：编码字符串

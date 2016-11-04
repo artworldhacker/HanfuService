@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dexingworld.hanfu.repository.dao.UserDao">
+    
+    <sql id="requestAllFields">
+        <![CDATA[
+            id,
+            userName,
+            passWord,
+            phone,
+            nickName,
+            lastLoginTime,
+            createTime,
+            updateTime,
+            status,
+            wrongPwdTimes
+        ]]>
+    </sql>
+    
+    <sql id="whereClause">
+        <where>
+            <if test="null!=id">AND id = #{id}</if>
+            <if test="null!=userName and ''!=userName">AND userName = #{userName}</if>
+            <if test="null!=passWord and ''!=passWord">AND passWord = #{passWord}</if>
+            <if test="null!=phone and ''!=phone">AND phone = #{phone}</if>
+            <if test="null!=nickName and ''!=nickName">AND nickName = #{nickName}</if>
+            <if test="null!=status and ''!=status">AND status = #{status}</if>
+            <if test="null!=wrongPwdTimes">AND wrongPwdTimes = #{wrongPwdTimes}</if>
+            <include refid="extendedWhereClause" />
+        </where>
+    </sql>
+    
+    <insert id="add" useGeneratedKeys="true" parameterType="com.dexingworld.hanfu.repository.entity.User" keyProperty="id">
+        INSERT INTO t_user
+        <trim prefix="(" suffix=")" prefixOverrides=",">
+            <if test="null!=userName and ''!=userName">,userName</if>
+            <if test="null!=passWord and ''!=passWord">,passWord</if>
+            <if test="null!=phone and ''!=phone">,phone</if>
+            <if test="null!=nickName and ''!=nickName">,nickName</if>
+            <if test="null!=lastLoginTime">,lastLoginTime</if>
+            <if test="null!=createTime">,createTime</if>
+            <if test="null!=updateTime">,updateTime</if>
+            <if test="null!=status and ''!=status">,status</if>
+            <if test="null!=wrongPwdTimes">,wrongPwdTimes</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" prefixOverrides=",">
+            <if test="null!=userName and ''!=userName">,#{userName}</if>
+            <if test="null!=passWord and ''!=passWord">,#{passWord}</if>
+            <if test="null!=phone and ''!=phone">,#{phone}</if>
+            <if test="null!=nickName and ''!=nickName">,#{nickName}</if>
+            <if test="null!=lastLoginTime">,#{lastLoginTime}</if>
+            <if test="null!=createTime">,#{createTime}</if>
+            <if test="null!=updateTime">,#{updateTime}</if>
+            <if test="null!=status and ''!=status">,#{status}</if>
+            <if test="null!=wrongPwdTimes">,#{wrongPwdTimes}</if>
+        </trim>
+    </insert>
+    
+    <update id="update" parameterType="com.dexingworld.hanfu.repository.entity.User">
+        UPDATE t_user
+        <trim prefix="SET" prefixOverrides=",">
+            <if test="null!=userName and ''!=userName">,userName = #{userName}</if>
+            <if test="null!=passWord and ''!=passWord">,passWord = #{passWord}</if>
+            <if test="null!=phone and ''!=phone">,phone = #{phone}</if>
+            <if test="null!=nickName and ''!=nickName">,nickName = #{nickName}</if>
+            <if test="null!=lastLoginTime">,lastLoginTime = #{lastLoginTime}</if>
+            <if test="null!=createTime">,createTime = #{createTime}</if>
+            <if test="null!=updateTime">,updateTime = #{updateTime}</if>
+            <if test="null!=status and ''!=status">,status = #{status}</if>
+            <if test="null!=wrongPwdTimes">,wrongPwdTimes = #{wrongPwdTimes}</if>
+            <include refid="extendedUpdateSql" />
+        </trim>
+        WHERE id = #{id}
+    </update>
+    
+    <select id="query" parameterType="com.dexingworld.hanfu.repository.entity.User" resultType="com.dexingworld.hanfu.repository.entity.User">
+        SELECT <include refid="requestAllFields"/> FROM t_user
+        <include refid="whereClause" />
+        <include refid="extendedOrderByClause" />
+        <if test="null!=requestOffset">
+            LIMIT #{startRow}, #{endRow}
+        </if>
+    </select>
+    
+    <select id="get" parameterType="com.dexingworld.hanfu.repository.entity.User" resultType="com.dexingworld.hanfu.repository.entity.User">
+        SELECT <include refid="requestAllFields"/> FROM t_user
+        <include refid="whereClause" />
+        LIMIT 1
+    </select>
+    
+    <select id="getById" parameterType="long" resultType="com.dexingworld.hanfu.repository.entity.User">
+        SELECT <include refid="requestAllFields"/> FROM t_user WHERE id = #{id}
+    </select>
+    
+    <select id="count" parameterType="com.dexingworld.hanfu.repository.entity.User" resultType="int">
+        SELECT COUNT(1) FROM t_user <include refid="whereClause" />
+    </select>
+    
+    <!-- 扩展的更新等语句（自定义）-->
+    <sql id="extendedUpdateSql">
+        <if test="null!=extendedParameter">
+            
+        </if>
+    </sql>
+    
+    <!-- 扩展的条件过滤语句（自定义）-->
+    <sql id="extendedWhereClause">
+        <if test="null!=extendedParameter">
+            
+        </if>
+    </sql>
+    
+    <!-- 扩展的排序等语句（自定义）-->
+    <sql id="extendedOrderByClause">
+        <if test="null!=extendedParameter">
+            
+        </if>
+    </sql>
+    
+</mapper>

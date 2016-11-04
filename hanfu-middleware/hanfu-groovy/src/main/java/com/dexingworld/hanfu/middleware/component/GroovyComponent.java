@@ -62,7 +62,7 @@ public class GroovyComponent {
      * @param params
      * @return
      */
-    public ResultResponse callGroovyMethod(String code,String method,Map<String,Object> params)  {
+    public ResultResponse invokeGroovyMethod(String code,String method,Map<String,Object> params)  {
         ResultResponse resultResponse = new ResultResponse();
         if(StringUtils.isEmpty(code)){
             return resultResponse.makeFailure("调用的groovy文件名不能为空!");

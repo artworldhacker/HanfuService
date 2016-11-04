@@ -34,9 +34,8 @@ public class InvokeGroovyMethodController {
         if(!GroovyComponent.isInit){
             groovyComponent.init();
         }
-        resultResponse =  groovyComponent.callGroovyMethod(request.getCode(),request.getMethod(),request.getMap());
+        resultResponse =  groovyComponent.invokeGroovyMethod(request.getCode(),request.getMethod(),request.getMap());
         return resultResponse;
     }
-
 
 }
