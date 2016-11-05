@@ -1,12 +1,14 @@
 package com.dexingworld.hanfu.biz.impl;
 
 import com.dexingworld.hanfu.biz.UserBizService;
+import com.dexingworld.hanfu.common.GlobalConsts;
 import com.dexingworld.hanfu.common.enums.LoginMsgEnum;
 import com.dexingworld.hanfu.common.enums.LoginStatusEnum;
 import com.dexingworld.hanfu.common.parameter.AddUser;
 import com.dexingworld.hanfu.common.response.ResultResponse;
 import com.dexingworld.hanfu.repository.entity.User;
 import com.dexingworld.hanfu.service.UserService;
+import com.dexingworld.hanfu.session.SessionProcess;
 import com.dexingworld.hanfu.utils.Base64Util;
 import com.dexingworld.hanfu.utils.PropertieUtils;
 import org.slf4j.Logger;
@@ -31,6 +33,10 @@ public class UserBizServiceImpl implements UserBizService {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private SessionProcess sessionProcess;
+
 
     @Override
     @Transactional(readOnly = true)
@@ -64,6 +70,8 @@ public class UserBizServiceImpl implements UserBizService {
         if(!resultResponse.isStatus()){
             return resultResponse;
         }
+        //存入cookie
+        sessionProcess.login((User)resultResponse.getResult(),response, GlobalConsts.DEFAULT_SESSION_TIMEOUT);
         //记录token
         return resultResponse.makeSuccessful();
     }

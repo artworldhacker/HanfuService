@@ -1,4 +1,4 @@
-package com.dexingworld.hanfu.web.session;
+package com.dexingworld.hanfu.session;
 
 import com.dexingworld.hanfu.common.GlobalConsts;
 import com.dexingworld.hanfu.middleware.redis.RedisCacheManager;
