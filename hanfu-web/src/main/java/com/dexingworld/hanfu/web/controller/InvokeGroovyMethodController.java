@@ -15,6 +15,10 @@ import javax.validation.Valid;
 /**
  * Created by wangpeng on 2016/10/19.
  */
+
+/**
+ * 调用groovy后台controller
+ */
 @RestController
 @RequestMapping("/groovy")
 public class InvokeGroovyMethodController {

@@ -11,6 +11,7 @@ import com.dexingworld.hanfu.service.UserService;
 import com.dexingworld.hanfu.session.SessionProcess;
 import com.dexingworld.hanfu.utils.Base64Util;
 import com.dexingworld.hanfu.utils.PropertieUtils;
+import com.dexingworld.hanfu.utils.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -45,37 +46,40 @@ public class UserBizServiceImpl implements UserBizService {
         User user = new User();
         user.setUserName(userName);
         user = userService.get(user);
-        if(user == null){
-            LOGGER.error("登陆失败，用户{}不存在",userName);
+        if (user == null) {
+            LOGGER.error("登陆失败，用户{}不存在", userName);
             return resultResponse.makeFailure(LoginMsgEnum.USER_NOUT_FOUNT.getMessage());
         }
         String encodePassword = Base64Util.encodeHanfuPassWord(passWord);
-        if(!encodePassword.equals(user.getPassWord())){
-            LOGGER.error("登陆失败，用户{}密码错误",userName);
+        if (!encodePassword.equals(user.getPassWord())) {
+            LOGGER.error("登陆失败，用户{}密码错误", userName);
             return resultResponse.makeFailure(LoginMsgEnum.USER_PASSWORD_WRONG.getMessage());
         }
-        if(LoginStatusEnum.LOCK.isEqual(user.getStatus())){
-            LOGGER.error("登陆失败，用户{}已锁定",userName);
+        if (LoginStatusEnum.LOCK.isEqual(user.getStatus())) {
+            LOGGER.error("登陆失败，用户{}已锁定", userName);
             return resultResponse.makeFailure(LoginMsgEnum.USER_BE_LOCK.getMessage());
         }
-        LOGGER.info("用户{}登陆成功",userName);
+        LOGGER.info("用户{}登陆成功", userName);
         resultResponse.setResult(user);
         return resultResponse.makeSuccessful();
     }
+
     @Override
     @Transactional(readOnly = true)
-    public ResultResponse login(String userName, String passWord,HttpServletResponse response) {
+    public ResultResponse login(String userName, String passWord, HttpServletResponse response) {
         ResultResponse resultResponse = new ResultResponse();
-        login(userName,passWord);
-        if(!resultResponse.isStatus()){
+        login(userName, passWord);
+        if (!resultResponse.isStatus()) {
             return resultResponse;
         }
         //存入cookie
-        sessionProcess.login((User)resultResponse.getResult(),response, GlobalConsts.DEFAULT_SESSION_TIMEOUT);
+        String accessToken = sessionProcess.login((User) resultResponse.getResult(), response, GlobalConsts.DEFAULT_SESSION_TIMEOUT);
+        if (StringUtils.isEmpty(accessToken)) {
+            LOGGER.error("存入cookie出错！！！！");
+        }
         //记录token
         return resultResponse.makeSuccessful();
     }
-
 
 
     @Override
@@ -84,7 +88,7 @@ public class UserBizServiceImpl implements UserBizService {
         ResultResponse resultResponse = new ResultResponse();
         try {
             User user = new User();
-            BeanUtils.copyProperties(addUser,user);
+            BeanUtils.copyProperties(addUser, user);
             Date now = new Date();
             user.setCreateTime(now);
             user.setUpdateTime(now);

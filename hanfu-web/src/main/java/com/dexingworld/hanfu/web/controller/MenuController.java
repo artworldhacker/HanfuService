@@ -21,6 +21,13 @@ public class MenuController {
     @Autowired
     private MenuBizService menuBizService;
 
+
+    /**
+     * 菜单新增
+     * @param addMenu
+     * @param bindingResult
+     * @return
+     */
     @ExceptionHandler
     @RequestMapping("/add")
     private ResultResponse add(@Valid AddMenu addMenu,BindingResult bindingResult){

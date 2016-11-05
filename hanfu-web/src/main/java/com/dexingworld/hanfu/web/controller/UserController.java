@@ -26,6 +26,14 @@ public class UserController {
     private UserBizService userBizService;
 
 
+    /**
+     * 登录
+     * @param userName
+     * @param passWord
+     * @param request
+     * @param response
+     * @return
+     */
     @ExceptionHandler
     @RequestMapping("/login")
     public ResultResponse login(@RequestParam(value = "userName") String userName,@RequestParam(value = "passWord") String passWord,ServletRequest request,HttpServletResponse response){
@@ -40,6 +48,13 @@ public class UserController {
         return resultResponse;
     }
 
+
+    /**
+     * 用户增加
+     * @param addUser
+     * @param bindingResult
+     * @return
+     */
     @ExceptionHandler
     @RequestMapping("/add")
     public ResultResponse add(@Valid AddUser addUser,BindingResult bindingResult){
