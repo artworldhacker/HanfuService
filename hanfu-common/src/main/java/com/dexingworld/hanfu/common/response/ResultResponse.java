@@ -1,5 +1,6 @@
 package com.dexingworld.hanfu.common.response;
 
+import com.dexingworld.hanfu.common.enums.SysCodeEnum;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import org.springframework.validation.FieldError;
@@ -38,9 +39,24 @@ public class ResultResponse<T> {
         return this;
     }
 
+    public ResultResponse makeFailure(String statusCode,String errorMsg){
+        this.status = false;
+        this.statusCode = statusCode;
+        this.error = errorMsg;
+        return this;
+    }
+
     public ResultResponse makeSuccessful(){
         this.status = true;
         return this;
+    }
+
+    public ResultResponse(SysCodeEnum sysCodeEnum){
+        this.status = sysCodeEnum.isSuccess();
+        this.statusCode = sysCodeEnum.getCode();
+        if(!status){
+            this.error = sysCodeEnum.getMessage();
+        }
     }
 
     public ResultResponse(boolean status) {

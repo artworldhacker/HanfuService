@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by wangpeng on 2016/10/10.
  */
-public class QueryNews implements Serializable {
+public class QueryNews extends SessionParameter {
 
     private static final long serialVersionUID = 1L;
 

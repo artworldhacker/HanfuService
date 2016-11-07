@@ -16,7 +16,31 @@
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html" />
     <![endif]-->
-    <!--#include file="/commons/include.html"-->
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+
+    <!-- Sweet Alert -->
+    <link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+
+
+    <!-- 全局js -->
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="js/plugins/layer/layer.min.js"></script>
+
+    <!-- 自定义js -->
+    <script src="js/hanfuLoad.js?v=4.1.0"></script>
+
+    <!-- Sweet alert -->
+    <script src="js/plugins/sweetalert/sweetalert.min.js"></script>
+    <!-- artTemplate -->
+    <script src="js/plugins/artTemplate/template.js"></script>
+    <script src="js/namespace.js"></script>
+    <script src="js/config.js"></script>
 </head>
 
 <body class="signin">
@@ -78,14 +102,14 @@
                         swal("提示！", "密码不能为空!", "error");
                         return;
                     }
-                    post($.URL.user.login,{'userName':$userName.val(),'passWord':$password.val()},function(result){console.log(result)
+                    postAjax($.URL.user.login,{'userName':$userName.val(),'passWord':$password.val()},function(result){console.log(result)
                         if(result.status){//登陆成功
                             swal("提示！", "登陆成功!", "success");
                             window.location.href = "index.html";
                         }else{
                             swal("提示！",result.error, "error");
                         }
-                    },function(result){ swal("提示！",result.error, "error");});
+                    });
                     return false;
                 }
             };

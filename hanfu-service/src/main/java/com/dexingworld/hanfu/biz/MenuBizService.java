@@ -1,6 +1,8 @@
 package com.dexingworld.hanfu.biz;
 
 import com.dexingworld.hanfu.common.parameter.AddMenu;
+import com.dexingworld.hanfu.common.parameter.QueryMenuParameter;
+import com.dexingworld.hanfu.common.response.MenuView;
 import com.dexingworld.hanfu.common.response.ResultResponse;
 
 /**
@@ -9,4 +11,6 @@ import com.dexingworld.hanfu.common.response.ResultResponse;
 public interface MenuBizService {
 
     ResultResponse add(AddMenu addMenu);
+
+    ResultResponse queryUserMenu(QueryMenuParameter queryMenuParameter);
 }

@@ -6,7 +6,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 /**
  * Created by wangpeng on 2016/11/4.
  */
-public class AddMenu {
+public class AddMenu extends SessionParameter{
 
     private static final long serialVersionUID = 1L;
     /**

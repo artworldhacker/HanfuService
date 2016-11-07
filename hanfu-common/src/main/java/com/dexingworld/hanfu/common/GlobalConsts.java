@@ -17,6 +17,8 @@ public class GlobalConsts {
      */
     public static final Long DEFAULT_SESSION_TIMEOUT = Long.valueOf(1800000L);
 
-    public static final String COOKIE_PREFIX = "hanfu-cookies_";
+    public static final String COOKIE_PREFIX = "hanfu_";
+
+    public static final String SESSION_COOKIE_KEY = "session_key";
 
 }

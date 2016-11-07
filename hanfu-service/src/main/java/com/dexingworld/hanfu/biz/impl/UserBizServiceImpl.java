@@ -61,14 +61,14 @@ public class UserBizServiceImpl implements UserBizService {
         }
         LOGGER.info("用户{}登陆成功", userName);
         resultResponse.setResult(user);
-        return resultResponse.makeSuccessful();
+        resultResponse.setStatus(true);
+        return resultResponse;
     }
 
     @Override
     @Transactional(readOnly = true)
     public ResultResponse login(String userName, String passWord, HttpServletResponse response) {
-        ResultResponse resultResponse = new ResultResponse();
-        login(userName, passWord);
+        ResultResponse resultResponse =  login(userName, passWord);
         if (!resultResponse.isStatus()) {
             return resultResponse;
         }

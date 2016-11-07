@@ -8,7 +8,7 @@ import java.util.Date;
 /**
  * Created by wangpeng on 2016/11/4.
  */
-public class AddUser  implements Serializable {
+public class AddUser  extends SessionParameter {
     private static final long serialVersionUID = 1L;
     /**
      * 用户名

@@ -7,7 +7,7 @@ import java.io.Serializable;
 /**
  * Created by wangpeng on 2016/10/10.
  */
-public class AddNews implements Serializable {
+public class AddNews extends SessionParameter{
 
     private static final long serialVersionUID = 1L;
 

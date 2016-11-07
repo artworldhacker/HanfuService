@@ -3,9 +3,7 @@
 
 //公共配置
 
-
-$(document).ready(function () {
-
+function loadLayout(){
     // MetsiMenu
     $('#side-menu').metisMenu();
 
@@ -74,6 +72,12 @@ $(document).ready(function () {
     if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
         $('#content-main').css('overflow-y', 'auto');
     }
+}
+
+
+$(document).ready(function () {
+
+
 
 });
 

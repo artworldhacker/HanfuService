@@ -4,6 +4,7 @@ import com.dexingworld.hanfu.biz.UserBizService;
 import com.dexingworld.hanfu.common.parameter.AddUser;
 import com.dexingworld.hanfu.common.response.ResultResponse;
 import com.dexingworld.hanfu.utils.StringUtils;
+import com.dexingworld.hanfu.web.annotation.NeedLogin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -55,6 +56,7 @@ public class UserController {
      * @param bindingResult
      * @return
      */
+    @NeedLogin
     @ExceptionHandler
     @RequestMapping("/add")
     public ResultResponse add(@Valid AddUser addUser,BindingResult bindingResult){

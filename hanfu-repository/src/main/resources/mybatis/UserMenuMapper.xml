@@ -73,6 +73,18 @@
     <select id="count" parameterType="com.dexingworld.hanfu.repository.entity.UserMenu" resultType="int">
         SELECT COUNT(1) FROM t_user_menu <include refid="whereClause" />
     </select>
+
+
+    <select id="queryUserMenuWithParent"  resultType="com.dexingworld.hanfu.repository.entity.Menu">
+        SELECT m.* FROM t_user_menu um
+        INNER JOIN t_menu m
+        ON um.menuId = m.id
+        WHERE um.userId = #{userId}
+        <if test="parentId != null">
+            AND  m.parentMenuId=#{parentId}
+        </if>
+        order by orderClomun
+    </select>
     
     <!-- 扩展的更新等语句（自定义）-->
     <sql id="extendedUpdateSql">

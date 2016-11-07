@@ -39,6 +39,8 @@ public class MenuView implements Serializable {
 
     private boolean checked;
 
+    private boolean hasChildren = false;
+
     public Long getId() {
         return id;
     }
@@ -100,6 +102,9 @@ public class MenuView implements Serializable {
     }
 
     public void setChildren(List<MenuView> children) {
+        if(children != null && children.size() > 0){
+            this.hasChildren = true;
+        }
         this.children = children;
     }
 
@@ -109,5 +114,13 @@ public class MenuView implements Serializable {
 
     public void setChecked(boolean checked) {
         this.checked = checked;
+    }
+
+    public boolean isHasChildren() {
+        return hasChildren;
+    }
+
+    public void setHasChildren(boolean hasChildren) {
+        this.hasChildren = hasChildren;
     }
 }
