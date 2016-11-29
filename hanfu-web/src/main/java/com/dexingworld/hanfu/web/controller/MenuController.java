@@ -25,16 +25,11 @@ public class MenuController {
     /**
      * 菜单新增
      * @param addMenu
-     * @param bindingResult
      * @return
      */
     @ExceptionHandler
     @RequestMapping("/add")
-    private ResultResponse add(@Valid AddMenu addMenu,BindingResult bindingResult){
-        ResultResponse resultResponse = new ResultResponse();
-        if(bindingResult != null && bindingResult.hasErrors()){
-            return resultResponse.makeFailure(bindingResult.getFieldError().getDefaultMessage());
-        }
+    private ResultResponse add(AddMenu addMenu){
         return menuBizService.add(addMenu);
     }
 

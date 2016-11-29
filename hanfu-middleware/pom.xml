@@ -17,6 +17,9 @@
         <module>hanfu-analysis</module>
         <module>hanfu-crawler</module>
         <module>hanfu-netty</module>
+        <module>hanfu-mongodb</module>
+        <module>hanfu-zookeeper</module>
+        <module>hanfu-mail</module>
     </modules>
 
 

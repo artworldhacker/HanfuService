@@ -79,3 +79,16 @@ function getAjax(url, data, successfn) {
         }
     });
 };
+
+/**
+ * 进度条
+ */
+function showLoadingDialog(){
+    swal({
+        title: "请稍等......",
+        html: true,
+        allowOutsideClick:false,
+        text: "<div class=\"progress progress-striped\" ><div class=\"progress-bar progress-bar-success\" style=\"width: 100%;\"></div> </div>",
+        showConfirmButton: false
+    });
+}

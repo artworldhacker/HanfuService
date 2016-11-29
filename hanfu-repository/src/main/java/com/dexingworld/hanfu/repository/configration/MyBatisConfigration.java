@@ -1,5 +1,6 @@
 package com.dexingworld.hanfu.repository.configration;
 
+import com.alibaba.druid.pool.DruidDataSource;
 import com.dexingworld.hanfu.repository.MyBatisRepository;
 import com.dexingworld.hanfu.repository.properties.DataSourceProperties;
 import org.apache.tomcat.jdbc.pool.DataSource;
@@ -41,6 +42,12 @@ public class MyBatisConfigration implements TransactionManagementConfigurer {
         dataSource.setMaxWait(dataSourceProperties.getMaxWait());
         return dataSource;
     }
+
+//    @Bean(name = "druidDataSource",initMethod = "init")
+//    public DruidDataSource getDridDataSource(){
+//        DruidDataSource druidDataSource = new DruidDataSource();
+//        druidDataSource.setUsername(dataSourceProperties.getUsername());
+//    }
 
     @Bean
     public SqlSessionFactoryBean getSqlSessionFactory() throws IOException {

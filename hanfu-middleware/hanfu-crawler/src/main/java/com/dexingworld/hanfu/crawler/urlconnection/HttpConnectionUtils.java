@@ -7,6 +7,7 @@ import org.springframework.util.StreamUtils;
 
 import java.io.DataOutputStream;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -21,7 +22,16 @@ public class HttpConnectionUtils {
     public static final String CHARSAET = "UTF-8";
 
     public static String get(String link) {
-        String result = null;
+        try {
+            return  new String(getBytes(link),CHARSAET);
+        } catch (UnsupportedEncodingException e) {
+            LOGGER.error(e.getMessage(), e);
+        }
+        return null;
+    }
+
+
+    public static byte[] getBytes(String link){
         try {
             URL url = new URL(link);
             HttpURLConnection connection = (HttpURLConnection) url
@@ -29,15 +39,14 @@ public class HttpConnectionUtils {
             connection.setRequestMethod(HttpMethodEnum.GET.toString());
             connection.connect();
             InputStream is = connection.getInputStream();
-            result = new String(StreamUtils.copyToByteArray(is),CHARSAET);
+            return StreamUtils.copyToByteArray(is);
         } catch (Exception e) {
             LOGGER.error(e.getMessage(),e);
         }
-        return result;
+        return null;
     }
 
-    public static String post(String link,String param){
-        String result = null;
+    public static byte[] postBytes(String link,String param){
         try {
             URL url = new URL(link);
             HttpURLConnection connection = (HttpURLConnection) url .openConnection();
@@ -61,11 +70,20 @@ public class HttpConnectionUtils {
             int resultCode=connection.getResponseCode();
             if(HttpURLConnection.HTTP_OK==resultCode){
                 InputStream is = connection.getInputStream();
-                result = new String(StreamUtils.copyToByteArray(is),CHARSAET);
+                return StreamUtils.copyToByteArray(is);
             }
         } catch (Exception e) {
             LOGGER.error(e.getMessage(),e);
         }
-        return result;
+        return null;
+    }
+
+    public static String post(String link,String param){
+        try {
+            return  new String(postBytes(link,param),CHARSAET);
+        } catch (UnsupportedEncodingException e) {
+            LOGGER.error(e.getMessage(),e);
+        }
+        return null;
     }
 }

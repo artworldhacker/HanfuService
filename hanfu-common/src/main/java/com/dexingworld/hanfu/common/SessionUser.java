@@ -1,8 +1,7 @@
 package com.dexingworld.hanfu.common;
 
-import java.awt.*;
 import java.io.Serializable;
-import java.util.List;
+
 
 /**
  * 用户会话信息
