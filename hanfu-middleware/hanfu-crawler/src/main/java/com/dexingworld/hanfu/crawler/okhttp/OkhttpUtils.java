@@ -10,6 +10,9 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.CookieManager;
+import java.net.CookiePolicy;
+import java.net.Proxy;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -27,6 +30,27 @@ public class OkhttpUtils {
 
     static {
         okHttpClient.setConnectTimeout(30, TimeUnit.SECONDS);
+
+        //--------------缓存
+        File cacheDirectory = new File("G:\\okhttpcache");
+        Cache cache = new Cache(cacheDirectory,10*1024);
+        okHttpClient.setCache(cache);
+
+       okHttpClient.setAuthenticator(new Authenticator() {
+            @Override
+            public Request authenticate(Proxy proxy, Response response) throws IOException {
+                String credential = Credentials.basic("username","password");
+                return response.request().newBuilder().header("Authorization",credential).build();
+            }
+
+            @Override
+            public Request authenticateProxy(Proxy proxy, Response response) throws IOException {
+                return null;
+            }
+        });
+
+
+        okHttpClient.setCookieHandler(new CookieManager(null, CookiePolicy.ACCEPT_ALL));
     }
 
 

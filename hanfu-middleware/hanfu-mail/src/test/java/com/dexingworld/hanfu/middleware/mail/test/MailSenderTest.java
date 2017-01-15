@@ -21,7 +21,7 @@ public class MailSenderTest extends BaseTest {
 
     @Test
     public void send(){
-        mailSender.send("测试邮件发送","562317154@qq.com","wonpera_562@163.com","Hello World!!!!!!");
+        mailSender.send("测试邮件发送","562317154@qq.com","wangpeng@duc365.com","<h1>Hello World!!!!!!</h1>");
     }
 
 
